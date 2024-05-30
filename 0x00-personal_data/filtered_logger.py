@@ -3,7 +3,7 @@
 """
 import logging
 import re
-from typing import List, Tuple
+from typing import List
 
 
 def filter_datum(fields: List[str],
@@ -23,7 +23,7 @@ class RedactingFormatter(logging.Formatter):
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
-    def __init__(self, fields: Tuple[str] = None):
+    def __init__(self, fields: List[str] = []):
         """Initializer"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
