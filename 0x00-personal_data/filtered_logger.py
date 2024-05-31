@@ -50,5 +50,3 @@ class RedactingFormatter(logging.Formatter):
                                       super().format(record),
                                       self.SEPARATOR)
         return record.message
-
-    if __name__ == ""
