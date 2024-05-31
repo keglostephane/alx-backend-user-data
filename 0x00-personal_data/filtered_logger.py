@@ -18,7 +18,7 @@ def filter_datum(fields: List[str],
     return re.sub(pattern, redaction, message)
 
 
-def get_logger():
+def get_logger() -> logging.Logger:
     """Returns a logger"""
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
@@ -50,3 +50,5 @@ class RedactingFormatter(logging.Formatter):
                                       super().format(record),
                                       self.SEPARATOR)
         return record.message
+
+    if __name__ == ""
