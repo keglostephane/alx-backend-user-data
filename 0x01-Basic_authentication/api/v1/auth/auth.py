@@ -12,7 +12,12 @@ class Auth:
                      path: str,
                      excluded_paths: List[str]) -> bool:
         """paths to authenticate"""
-        return False
+        if path is None or excluded_paths is None:
+            return True
+        for endpoint in excluded_paths:
+            if endpoint[:-1] == path or endpoint == path:
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """authorization_header"""
