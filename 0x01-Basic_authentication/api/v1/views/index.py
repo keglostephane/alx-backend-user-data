@@ -26,7 +26,7 @@ def stats() -> str:
     return jsonify(stats)
 
 
-@app_views.record('forbidden', strict_slashes=False)
+@app_views.route('/forbidden', strict_slashes=False)
 def forbidden_access() -> str:
     """Access a forbidden endpoint"""
     abort(403)
