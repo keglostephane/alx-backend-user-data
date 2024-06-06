@@ -28,3 +28,7 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """current_user"""
         return None
+
+
+class BasicAuth(Auth):
+    """Not Implemented"""
