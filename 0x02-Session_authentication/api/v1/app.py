@@ -32,7 +32,8 @@ def request_filter():
                               '/api/v1/forbidden/']):
             if not auth.authorization_header(request):
                 abort(401)
-            request.current_user = auth.current_user(request)
+            if auth.authorization_header(request).startswith('Basic'):
+                request.current_user = auth.current_user(request)
 
 
 @app.errorhandler(401)
