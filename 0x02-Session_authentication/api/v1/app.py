@@ -36,7 +36,6 @@ def request_filter():
             request.current_user = auth.current_user(request)
 
 
-
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """Unauthorized handler
