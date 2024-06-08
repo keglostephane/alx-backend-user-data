@@ -31,8 +31,7 @@ def request_filter():
                               '/api/v1/unauthorized/',
                               '/api/v1/forbidden/']):
             if not auth.authorization_header(request):
-                if not request.path.endswith(('me', 'me/')):
-                    abort(401)
+                abort(401)
             request.current_user = auth.current_user(request)
 
 
