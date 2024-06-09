@@ -3,7 +3,7 @@
 """
 from .auth import Auth
 from uuid import uuid4
-from typing import TypeVar
+from typing import TypeVar, NoReturn
 from models.user import User
 
 
@@ -31,6 +31,7 @@ class SessionAuth(Auth):
             return None
         if not isinstance(session_id, str):
             return None
+
         return self.user_id_by_session_id.get(session_id)
 
     def current_user(self, request=None) -> TypeVar('User'):
@@ -40,3 +41,20 @@ class SessionAuth(Auth):
         user_id = self.user_id_for_session_id(session_id)
 
         return User.get(user_id)
+
+    def destroy_session(self, request=None) -> NoReturn:
+        """Destroy user session (logout).
+        """
+        session_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_id)
+
+        if request is None:
+            return False
+        if not session_id:
+            return False
+        if not user_id:
+            return False
+
+        del self.user_id_by_session_id[session_id]
+
+        return True
