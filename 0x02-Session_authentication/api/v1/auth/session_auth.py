@@ -54,8 +54,6 @@ class SessionAuth(Auth):
             return False
         if not user_id:
             return False
-        if not User.get(user_id):
-            return False
 
         user_session_ids = [key for key in self.user_id_by_session_id.keys()
                             if self.user_id_by_session_id[key] == user_id]
