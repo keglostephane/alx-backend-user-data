@@ -44,11 +44,7 @@ def logout() -> Dict:
     """
     from api.v1.app import auth
 
-    if not auth.session_cookie(request):
-        abort(401)
-    if not auth.current_user(request):
-        abort(400)
-    if not auth.destroy_session(request):
-        abort(404)
+    if auth.destroy_session(request):
+        return jsonify({}), 200
 
-    return jsonify({}), 200
+    abort(404)
