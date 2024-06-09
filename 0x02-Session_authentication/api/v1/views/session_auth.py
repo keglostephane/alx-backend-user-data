@@ -37,7 +37,7 @@ def login() -> Dict:
     return json_resp
 
 
-@app_views.route('auth_session/logout', methods=['DELETE'],
+@app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
 def logout() -> Dict:
     """logout user.

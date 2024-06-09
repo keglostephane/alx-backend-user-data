@@ -3,7 +3,7 @@
 """
 from .auth import Auth
 from uuid import uuid4
-from typing import TypeVar, NoReturn
+from typing import TypeVar
 from models.user import User
 
 
@@ -42,7 +42,7 @@ class SessionAuth(Auth):
 
         return User.get(user_id)
 
-    def destroy_session(self, request=None) -> NoReturn:
+    def destroy_session(self, request=None) -> bool:
         """Destroy user session (logout).
         """
         session_id = self.session_cookie(request)
@@ -52,11 +52,7 @@ class SessionAuth(Auth):
             return False
         if not session_id:
             return False
-        if session_id not in self.user_id_by_session_id.keys():
-            return False
         if not user_id:
-            return False
-        if user_id not in self.user_id_by_session_id.values():
             return False
 
         user_session_ids = [key for key in self.user_id_by_session_id.keys()
