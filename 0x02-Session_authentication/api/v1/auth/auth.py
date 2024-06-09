@@ -31,7 +31,6 @@ class Auth:
             return None
         return request.headers.get('Authorization')
 
-        """current_user"""
         return None
 
     def session_cookie(self, request=None) -> str:

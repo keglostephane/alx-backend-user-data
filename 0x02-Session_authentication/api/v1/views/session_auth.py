@@ -46,8 +46,6 @@ def logout() -> Dict:
 
     if not auth.session_cookie(request):
         abort(401)
-    if not auth.current_user(request):
-        abort(401)
     if not auth.destroy_session(request):
         abort(404)
 
