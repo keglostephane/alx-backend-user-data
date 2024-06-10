@@ -26,10 +26,11 @@ class SessionDBAuth(SessionExpAuth):
     def user_id_for_session_id(self, session_id=None) -> Union[bool, str]:
         """Return user ID from from session_id of UserSession.
         """
-        user_sessions = UserSession.search({'session_id': session_id})
-
         if not session_id:
             return None
+
+        user_sessions = UserSession.search({'session_id': session_id})
+
         if not user_sessions:
             return None
 
