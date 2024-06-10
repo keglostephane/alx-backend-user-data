@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Session With Expiration
 """
-from .session_auth import SessionAuth
+from api.v1.auth.session_auth import SessionAuth
 from os import getenv
 from typing import TypeVar, Union
 from datetime import datetime, timedelta

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Session
 """
-from .auth import Auth
+from api.v1.auth.auth import Auth
 from uuid import uuid4
 from typing import TypeVar
 from models.user import User
