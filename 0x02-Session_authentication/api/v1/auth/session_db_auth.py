@@ -31,7 +31,7 @@ class SessionDBAuth(SessionExpAuth):
 
         user_sessions = UserSession.search({'session_id': session_id})
 
-        if not user_sessions:
+        if not user_sessions or user_sessions == []:
             return None
 
         user_session = user_sessions[0]
