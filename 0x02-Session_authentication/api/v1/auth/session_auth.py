@@ -55,10 +55,6 @@ class SessionAuth(Auth):
         if not user_id:
             return False
 
-        user_session_ids = [key for key in self.user_id_by_session_id.keys()
-                            if self.user_id_by_session_id[key] == user_id]
-
-        for session_id in user_session_ids:
-            del self.user_id_by_session_id[session_id]
+        del self.user_id_by_session_id[session_id]
 
         return True
