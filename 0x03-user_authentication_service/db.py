@@ -50,5 +50,5 @@ class DB:
         try:
             user = self._session.query(User).filter_by(**kwargs)
             return user
-        except AttributeError:
+        except Exception:
             raise InvalidRequestError
