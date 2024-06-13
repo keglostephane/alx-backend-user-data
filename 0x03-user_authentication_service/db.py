@@ -60,4 +60,10 @@ class DB:
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update a user
         """
-        pass
+        try:
+            user = self.find_user_by(id=user_id)
+            self._session.query(User).filter(User.id == user.id).\
+                update(kwargs)
+            return None
+        except InvalidRequestError:
+            raise ValueError
