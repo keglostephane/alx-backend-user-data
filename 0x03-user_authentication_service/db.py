@@ -49,9 +49,9 @@ class DB:
         """Retrieve the first user matching keyword argument"""
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
-        except AttributeError:
+        except Exception:
             raise InvalidRequestError
         if not user:
-            raise
+            raise NoResultFound
 
         return user
