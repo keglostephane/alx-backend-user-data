@@ -55,7 +55,4 @@ class DB:
         except AttributeError:
             raise InvalidRequestError
 
-        if not user:
-            raise NoResultFound
-
         return user
