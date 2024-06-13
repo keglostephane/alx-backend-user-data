@@ -47,12 +47,8 @@ class DB:
 
     def find_user_by(self, **kwargs: Dict) -> User:
         """Retrieve the first user matching keyword argument"""
-        if not kwargs:
-            raise InvalidRequestError
-
         try:
             user = self._session.query(User).filter_by(**kwargs)
+            return user
         except AttributeError:
             raise InvalidRequestError
-
-        return user
