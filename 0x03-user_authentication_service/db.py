@@ -47,12 +47,12 @@ class DB:
 
     def find_user_by(self, **kwargs: Dict) -> Union[User, None]:
         """Retrieve the first user matching keyword argument"""
+        if not kwargs:
+            raise InvalidRequestError("Missing parameter(s)")
+            return None
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
             return user
         except NoResultFound:
-            raise NoResultFound("User Not Found")
-            return None
-        except InvalidRequestError:
-            raise InvalidRequestError("Invalid Request")
+            raise NoResultFound("No User Found")
             return None
