@@ -49,8 +49,9 @@ class DB:
         """Retrieve the first user matching keyword argument"""
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
-            return user
         except NoResultFound:
             raise NoResultFound("No result found")
         except InvalidRequestError:
             raise InvalidRequestError("Invalid request")
+        else:
+            return user
