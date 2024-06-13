@@ -45,8 +45,9 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs: Dict) -> User:
-        """Retrieve the first user matching keyword argument"""
+    def find_user_by(self, **kwargs) -> User:
+        """Retrieve the first user matching keyword argument
+        """
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
         except Exception:
@@ -55,3 +56,8 @@ class DB:
             raise NoResultFound
 
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Update a user
+        """
+        pass
