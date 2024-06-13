@@ -10,7 +10,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from user import Base
 from user import User
-from typing import Dict, Union
+from typing import Dict
 
 
 class DB:
@@ -45,14 +45,12 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs: Dict) -> Union[User, None]:
+    def find_user_by(self, **kwargs: Dict) -> User:
         """Retrieve the first user matching keyword argument"""
         if not kwargs:
             raise InvalidRequestError("Missing parameter(s)")
-            return None
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
             return user
         except NoResultFound:
             raise NoResultFound("No User Found")
-            return None
