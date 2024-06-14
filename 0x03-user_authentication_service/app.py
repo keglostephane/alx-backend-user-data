@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Flask App
 """
-from flask import Flask, jsonify, request, abort, 
+from flask import Flask, jsonify, request, abort
 from auth import Auth
 from typing import Dict
 
@@ -39,7 +39,7 @@ def login() -> Dict:
     password = request.form.get('password')
 
     if not AUTH.valid_login(email, password):
-        abort(404)
+        abort(401)
 
     session_id = AUTH.create_session(email)
     resp = jsonify({"email": email, "message": "logged in"})
