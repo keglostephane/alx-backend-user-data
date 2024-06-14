@@ -3,21 +3,20 @@
 """
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
-from typing import Dict
 
 app = Flask(__name__)
 AUTH = Auth()
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
-def welcome() -> Dict:
+def welcome() -> str:
     """Index
     """
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
-def users() -> Dict:
+def users() -> str:
     """User Registration
     """
     email = request.form.get('email')
@@ -32,7 +31,7 @@ def users() -> Dict:
 
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
-def login() -> Dict:
+def login() -> str:
     """Log in a user.
     """
     email = request.form.get('email')
@@ -62,7 +61,7 @@ def logout() -> str:
 
 
 @app.route('/profile', methods=['GET'], strict_slashes=False)
-def profile() -> Dict:
+def profile() -> str:
     """User profile
     """
     session_id = request.cookies.get('session_id')
@@ -72,6 +71,19 @@ def profile() -> Dict:
         abort(403)
 
     return jsonify({"email": user.email})
+
+
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
+def get_reset_password_token() -> str:
+    """reset password token
+    """
+    email = request.form.get('email')
+    try:
+        reset_token = Auth.get_reset_password_token(email)
+    except ValueError:
+        abort(403)
+
+    return jsonify({"email": email, "reset_token": reset_token})
 
 
 if __name__ == "__main__":
